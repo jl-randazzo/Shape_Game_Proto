@@ -1,9 +1,10 @@
 ﻿
+using System;
 /// <summary>
 /// Dilleneates the different types of dialogue instruction elements
 /// </summary>
 public enum DialogueInstructionElementType {
-    WORD, SET_SPEED
+    TEXT, SET_SPEED, WAIT, CLEAR
 }
 
 /// <summary>
@@ -14,8 +15,6 @@ public struct DialogueInstructionElement {
     /// Common variables between all types
     /// </summary>
     public DialogueInstructionElementType type { get; private set; }
-
-    public int start_index { get; private set; }
 
     /// <summary>
     /// Variables for 'WORD' type instructions
@@ -30,12 +29,18 @@ public struct DialogueInstructionElement {
     public bool passive { get; private set; }
 
     /// <summary>
+    /// Variables for 'WAIT' type instructions
+    /// </summary>
+    public float wait_s { get; private set; }
+
+    /// <summary>
     /// Word static constructor
     /// </summary>
     /// <param name="word"></param>
     /// <returns></returns>
-    public static DialogueInstructionElement Word(string word) {
+    public static DialogueInstructionElement Text(string word) {
         DialogueInstructionElement dialogueInstruction = new DialogueInstructionElement();
+        dialogueInstruction.type = DialogueInstructionElementType.TEXT;
         dialogueInstruction.word = word;
         return dialogueInstruction;
     }
@@ -47,7 +52,30 @@ public struct DialogueInstructionElement {
     /// <returns></returns>
     public static DialogueInstructionElement Speed(float speed) {
         DialogueInstructionElement dialogueInstruction = new DialogueInstructionElement();
+        dialogueInstruction.type = DialogueInstructionElementType.SET_SPEED;
         dialogueInstruction.speed = speed;
+        return dialogueInstruction;
+    }
+
+    /// <summary>
+    /// Wait for an amount of time
+    /// </summary>
+    /// <param name="s"></param>
+    /// <returns></returns>
+    public static DialogueInstructionElement Wait(float s) {
+        DialogueInstructionElement dialogueInstruction = new DialogueInstructionElement();
+        dialogueInstruction.type = DialogueInstructionElementType.WAIT;
+        dialogueInstruction.wait_s = s;
+        return dialogueInstruction;
+    }
+
+    /// <summary>
+    /// Method that generates an instruction element to clear the dialogue box
+    /// </summary>
+    /// <returns></returns>
+    public static DialogueInstructionElement Clear() {
+        DialogueInstructionElement dialogueInstruction = new DialogueInstructionElement();
+        dialogueInstruction.type = DialogueInstructionElementType.CLEAR;
         return dialogueInstruction;
     }
 }
