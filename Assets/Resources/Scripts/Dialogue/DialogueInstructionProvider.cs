@@ -13,6 +13,8 @@ public class DialogueInstructionProvider : MonoBehaviour {
     private int instruction_index = 0;
 
     private const char SET_SPEED = 'S';
+    
+    private const char WAIT = 'W';
 
     void Awake() {
         runtime_instructions = instructions.Select(instruction => TransformInstruction(instruction)).ToArray();
@@ -56,6 +58,8 @@ public class DialogueInstructionProvider : MonoBehaviour {
         switch (command_type) {
             case SET_SPEED:
                 return ParseSpeedCommand(command_string);
+            case WAIT:
+                return ParseWaitCommand(command_string);
             default:
                 throw new System.Exception("Unknown command type '" + command_type + "'");
         }
@@ -64,6 +68,11 @@ public class DialogueInstructionProvider : MonoBehaviour {
     private DialogueInstructionElement ParseSpeedCommand(string command_string) {
         string[] args = command_string.Split(':', ',');
         return DialogueInstructionElement.Speed(Single.Parse(args[1]));
+    }
+
+    private DialogueInstructionElement ParseWaitCommand(string command_string) {
+        string[] args = command_string.Split(':', ',');
+        return DialogueInstructionElement.Wait(Single.Parse(args[1]));
     }
 
     // Start is called before the first frame update

@@ -245,7 +245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   instructions:
-  - '{S: 15.0}RED: Character dialogue'
+  - '{S: 15.0}RED: Character is speaking.'
   - 'BLOB: Booooopedo'
   controller: {fileID: 1244712556}
 --- !u!4 &396388459
@@ -486,7 +486,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   instructions:
-  - 'I want to {S: 3.0}FUC{S: 100.0}KING GET OUT OF HERE'
+  - '{S: 7.0}What {W: .5}the {W:.5}{S: 20}HEEEEELL WAS THAT!?'
   - '{S: 15.0}RED: Character dialogue'
   - 'BLOB: Booooopedo'
   controller: {fileID: 1244712556}
